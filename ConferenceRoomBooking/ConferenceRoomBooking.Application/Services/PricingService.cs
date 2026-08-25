@@ -1,0 +1,106 @@
+﻿using ConferenceRoomBooking.Application.Interfaces.Services;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConferenceRoomBooking.Application.Services
+{
+    public class PricingService : IPricingService
+    {
+        private const decimal MorningMultiplier = 0.90m;
+        private const decimal StandardMultiplier = 1.00m;
+        private const decimal PeakMultiplier = 1.15m;
+        private const decimal EveningMultiplier = 0.80m;
+
+        private static readonly TimeSpan OpeningTime = new(6, 0, 0);
+
+        private static readonly TimeSpan ClosingTime = new(23, 0, 0);
+
+        public decimal CalculateRentalPrice(decimal hourlyRate, DateTime startTime, DateTime endTime)
+        {
+            ValidateInput(hourlyRate, startTime, endTime);
+
+            var start = startTime.TimeOfDay;
+            var end = endTime.TimeOfDay;
+
+            decimal totalPrice = 0;
+
+            while (start < end)
+            {
+                var nextBoundary = GetNextBoundary(start, end);
+                var multiplier = GetPriceMultiplier(start);
+
+                var duration = nextBoundary - start;
+
+                totalPrice += (decimal)duration.TotalHours * hourlyRate * multiplier;
+
+                start = nextBoundary;
+            }
+
+            return decimal.Round(totalPrice, 2, MidpointRounding.AwayFromZero);
+        }
+
+        private static void ValidateInput(decimal hourlyRate, DateTime startTime, DateTime endTime)
+        {
+            if (hourlyRate <= 0)
+            {
+                throw new ArgumentException("Hourly rate must be greater than zero.", nameof(hourlyRate));
+            }
+
+            if (startTime >= endTime)
+            {
+                throw new ArgumentException("Start time must be earlier than end time.");
+            }
+
+            var start = startTime.TimeOfDay;
+            var end = endTime.TimeOfDay;
+
+            if (start < OpeningTime || end > ClosingTime)
+            {
+                throw new ArgumentException("Booking time must be between 06:00 and 23:00.");
+            }
+        }
+
+        private static TimeSpan GetNextBoundary(TimeSpan currentTime, TimeSpan endTime)
+        {
+            var boundaries = new[]
+            {
+                new TimeSpan(9, 0, 0),
+                new TimeSpan(12, 0, 0),
+                new TimeSpan(14, 0, 0),
+                new TimeSpan(18, 0, 0),
+                ClosingTime
+            };
+
+            foreach (var boundary in boundaries)
+            {
+                if (boundary > currentTime)
+                {
+                    return boundary < endTime ? boundary : endTime;
+                }
+            }
+
+            return endTime;
+        }
+
+        private static decimal GetPriceMultiplier(TimeSpan time)
+        {
+            if (time >= OpeningTime && time < new TimeSpan(9, 0, 0))
+            {
+                return MorningMultiplier;
+            }
+
+            if (time >= new TimeSpan(12, 0, 0) && time < new TimeSpan(14, 0, 0))
+            {
+                return PeakMultiplier;
+            }
+
+            if (time >= new TimeSpan(18, 0, 0) && time < ClosingTime)
+            {
+                return EveningMultiplier;
+            }
+
+            return StandardMultiplier;
+        }
+    }
+}

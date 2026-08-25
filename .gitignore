@@ -1,0 +1,70 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Visual Studio Code
+.vscode/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+.nuget/
+
+# Test results
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# Code coverage
+coverage/
+coverage.opencover.xml
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# ASP.NET / Development certificates
+*.pfx
+
+# Local configuration
+appsettings.Local.json
+appsettings.Development.local.json
+
+# User-specific secrets
+secrets.json
+
+# Publish output
+publish/
+[Ww]wwroot/
+
+# Entity Framework generated temporary files
+efbundle/
+
+# Node / Angular (if frontend is added later)
+node_modules/
+dist/
+.angular/
+.nx/
