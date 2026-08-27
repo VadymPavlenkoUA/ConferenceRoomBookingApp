@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConferenceRoomBooking.Domain.Entities
 {
-    public class HallService
+    public class HallServiceItem
     {
         public int HallId { get; set; }
 

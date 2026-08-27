@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConferenceRoomBooking.Infrastructure.Data.Configurations
 {
-    public class HallServiceConfiguration : IEntityTypeConfiguration<HallService>
+    public class HallServiceConfiguration : IEntityTypeConfiguration<HallServiceItem>
     {
-        public void Configure(EntityTypeBuilder<HallService> builder)
+        public void Configure(EntityTypeBuilder<HallServiceItem> builder)
         {
             builder.HasKey(x => new
             {

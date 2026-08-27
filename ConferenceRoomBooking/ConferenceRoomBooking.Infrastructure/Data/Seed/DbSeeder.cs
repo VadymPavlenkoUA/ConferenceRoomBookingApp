@@ -58,34 +58,34 @@ namespace ConferenceRoomBooking.Infrastructure.Data.Seed
 
             var hallServices = new[]
             {
-                new HallService
+                new HallServiceItem
                 {
                     HallId = hallA.Id,
                     ServiceId = projector.Id
                 },
-                new HallService
+                new HallServiceItem
                 {
                     HallId = hallA.Id,
                     ServiceId = wiFi.Id
                 },
 
-                new HallService
+                new HallServiceItem
                 {
                     HallId = hallB.Id,
                     ServiceId = projector.Id
                 },
-                new HallService
+                new HallServiceItem
                 {
                     HallId = hallB.Id,
                     ServiceId = wiFi.Id
                 },
-                new HallService
+                new HallServiceItem
                 {
                     HallId = hallB.Id,
                     ServiceId = sound.Id
                 },
 
-                new HallService
+                new HallServiceItem
                 {
                     HallId = hallC.Id,
                     ServiceId = wiFi.Id

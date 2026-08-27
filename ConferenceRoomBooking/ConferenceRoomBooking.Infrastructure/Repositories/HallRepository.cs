@@ -14,25 +14,31 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Hall?> GetByIdAsync(int id)
+        public async Task<Hall?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             return await _context.Halls
                 .Include(h => h.HallServices)
                 .ThenInclude(hs => hs.Service)
-                .FirstOrDefaultAsync(h => h.Id == id);
+                .FirstOrDefaultAsync(h => h.Id == id, cancellationToken);
         }
 
-        public async Task<List<Hall>> GetAllAsync()
+        public async Task<List<Hall>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.Halls
                 .Include(h => h.HallServices)
                 .ThenInclude(hs => hs.Service)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
         }
 
-        public async Task AddAsync(Hall hall)
+        public async Task<List<Hall>> GetAvailableAsync(int capacity, DateTime startTime, DateTime endTime, CancellationToken cancellationToken = default)
         {
-            await _context.Halls.AddAsync(hall);
+            return await _context.Halls.Where(h => h.Capacity >= capacity && !h.Bookings.Any(b =>
+                        startTime < b.EndTime && endTime > b.StartTime)).ToListAsync(cancellationToken);
+        }
+
+        public async Task AddAsync(Hall hall, CancellationToken cancellationToken = default)
+        {
+            await _context.Halls.AddAsync(hall, cancellationToken);
         }
 
         public Task UpdateAsync(Hall hall)

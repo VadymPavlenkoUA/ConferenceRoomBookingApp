@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ConferenceRoomBooking.Application.DTOs.Services;
 
-namespace ConferenceRoomBooking.Domain.Entities
+namespace ConferenceRoomBooking.Application.DTOs.Bookings
 {
-    public class Booking
+    public class BookingResponse
     {
         public int Id { get; set; }
 
         public int HallId { get; set; }
 
-        public Hall Hall { get; set; } = null!;
+        public string HallName { get; set; } = string.Empty;
 
         public DateTime StartTime { get; set; }
 
@@ -24,6 +22,6 @@ namespace ConferenceRoomBooking.Domain.Entities
 
         public DateTime CreatedAt { get; set; }
 
-        public ICollection<BookingServiceItem> BookingServices { get; set; } = new List<BookingServiceItem>();
+        public List<ServiceResponse> Services { get; set; } = [];
     }
 }

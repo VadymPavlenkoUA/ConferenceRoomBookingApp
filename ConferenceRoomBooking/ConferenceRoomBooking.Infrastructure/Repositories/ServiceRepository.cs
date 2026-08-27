@@ -14,21 +14,26 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Service?> GetByIdAsync(int id)
+        public async Task<Service?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            return await _context.Services.FirstOrDefaultAsync(s => s.Id == id);
+            return await _context.Services.FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
         }
 
-        public async Task<List<Service>> GetByIdsAsync(IEnumerable<int> ids)
+        public async Task<List<Service>> GetByIdsAsync(IEnumerable<int> ids, CancellationToken cancellationToken = default)
         {
             var serviceIds = ids.Distinct().ToList();
 
-            return await _context.Services.Where(s => serviceIds.Contains(s.Id)).ToListAsync();
+            return await _context.Services.Where(s => serviceIds.Contains(s.Id)).ToListAsync(cancellationToken);
         }
 
-        public async Task AddAsync(Service service)
+        public async Task<List<Service>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            await _context.Services.AddAsync(service);
+            return await _context.Services.ToListAsync(cancellationToken);
+        }
+
+        public async Task AddAsync(Service service, CancellationToken cancellationToken = default)
+        {
+            await _context.Services.AddAsync(service, cancellationToken);
         }
 
         public Task UpdateAsync(Service service)

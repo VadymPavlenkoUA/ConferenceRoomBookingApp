@@ -10,6 +10,10 @@ namespace ConferenceRoomBooking.Infrastructure.Data.Configurations
         {
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.RentalPrice).HasPrecision(18, 2);
+
+            builder.Property(x => x.ServicesPrice).HasPrecision(18, 2);
+
             builder.Property(x => x.TotalPrice).HasPrecision(18, 2);
 
             builder.Property(x => x.StartTime).IsRequired();

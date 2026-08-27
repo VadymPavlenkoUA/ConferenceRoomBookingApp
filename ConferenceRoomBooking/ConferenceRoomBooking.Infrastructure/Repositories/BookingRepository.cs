@@ -14,31 +14,45 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Booking?> GetByIdAsync(int id)
+        public async Task<Booking?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             return await _context.Bookings
                 .Include(b => b.Hall)
                 .Include(b => b.BookingServices).ThenInclude(bs => bs.Service)
-                .FirstOrDefaultAsync(b => b.Id == id);
+                .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
         }
 
-        public async Task<List<Booking>> GetAllAsync()
+        public async Task<List<Booking>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.Bookings
                 .Include(b => b.Hall)
                 .Include(b => b.BookingServices).ThenInclude(bs => bs.Service)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
         }
 
-        public async Task AddAsync(Booking booking)
+        public async Task AddAsync(Booking booking, CancellationToken cancellationToken = default)
         {
-            await _context.Bookings.AddAsync(booking);
+            await _context.Bookings.AddAsync(booking, cancellationToken);
         }
 
-        public async Task<bool> HasOverlappingBookingAsync(int hallId, DateTime startTime, DateTime endTime)
+        public Task UpdateAsync(Booking booking)
         {
-            return await _context.Bookings.AnyAsync(b => b.HallId == hallId &&
-                startTime < b.EndTime && endTime > b.StartTime);
+            _context.Bookings.Update(booking);
+
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteAsync(Booking booking)
+        {
+            _context.Bookings.Remove(booking);
+
+            return Task.CompletedTask;
+        }
+
+        public async Task<bool> HasOverlappingBookingAsync(int hallId, DateTime startTime, DateTime endTime, int? excludedBookingId = null, CancellationToken cancellationToken = default)
+        {
+            return await _context.Bookings.AnyAsync(b => b.HallId == hallId && b.Id != excludedBookingId &&
+                startTime < b.EndTime && endTime > b.StartTime, cancellationToken);
         }
     }
 }

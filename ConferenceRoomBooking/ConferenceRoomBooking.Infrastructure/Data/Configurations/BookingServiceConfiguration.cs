@@ -7,9 +7,9 @@ using System.Text;
 
 namespace ConferenceRoomBooking.Infrastructure.Data.Configurations
 {
-    public class BookingServiceConfiguration: IEntityTypeConfiguration<BookingService>
+    public class BookingServiceConfiguration: IEntityTypeConfiguration<BookingServiceItem>
     {
-        public void Configure(EntityTypeBuilder<BookingService> builder)
+        public void Configure(EntityTypeBuilder<BookingServiceItem> builder)
         {
             builder.HasKey(x => new
             {

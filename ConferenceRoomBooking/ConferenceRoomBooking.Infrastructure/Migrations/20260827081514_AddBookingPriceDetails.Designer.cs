@@ -4,6 +4,7 @@ using ConferenceRoomBooking.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConferenceRoomBooking.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260827081514_AddBookingPriceDetails")]
+    partial class AddBookingPriceDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +61,7 @@ namespace ConferenceRoomBooking.Infrastructure.Migrations
 
                     b.HasIndex("HallId", "StartTime", "EndTime");
 
-                    b.ToTable("Bookings", (string)null);
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.BookingService", b =>
@@ -77,7 +80,7 @@ namespace ConferenceRoomBooking.Infrastructure.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("BookingServices", (string)null);
+                    b.ToTable("BookingServices");
                 });
 
             modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.Hall", b =>
@@ -102,7 +105,7 @@ namespace ConferenceRoomBooking.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Halls", (string)null);
+                    b.ToTable("Halls");
                 });
 
             modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.HallService", b =>
@@ -117,7 +120,7 @@ namespace ConferenceRoomBooking.Infrastructure.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("HallServices", (string)null);
+                    b.ToTable("HallServices");
                 });
 
             modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.Service", b =>
@@ -139,7 +142,7 @@ namespace ConferenceRoomBooking.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services", (string)null);
+                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("ConferenceRoomBooking.Domain.Entities.Booking", b =>

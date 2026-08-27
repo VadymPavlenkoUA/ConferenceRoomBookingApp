@@ -16,9 +16,9 @@ namespace ConferenceRoomBooking.Infrastructure.Data
 
         public DbSet<Hall> Halls => Set<Hall>();
         public DbSet<Service> Services => Set<Service>();
-        public DbSet<HallService> HallServices => Set<HallService>();
+        public DbSet<HallServiceItem> HallServices => Set<HallServiceItem>();
         public DbSet<Booking> Bookings => Set<Booking>();
-        public DbSet<BookingService> BookingServices => Set<BookingService>();
+        public DbSet<BookingServiceItem> BookingServices => Set<BookingServiceItem>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
