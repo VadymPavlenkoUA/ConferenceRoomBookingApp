@@ -18,7 +18,7 @@ The main business requirements are:
 - Manage conference halls, including their names, capacity, hourly rental rates, and available services
 - Manage additional services that can be provided with a hall booking
 - Create, view, update, and delete room bookings
-- Prevent double booking of the same conference hall for overlapping time periods
+- Prevent deletion of halls or services that are currently in use
 - Ensure that selected services are available for the chosen conference hall
 - Check which conference halls are available for a specified capacity and time period
 - Calculate the rental price based on the booking duration and time-based pricing rules
@@ -135,9 +135,9 @@ Swagger UI provides an interactive interface for exploring and testing all avail
 When running the application in the Development environment, Swagger UI is available at:
 
 ```text
-https://localhost:<port>/swagger 
+https://localhost:<port>/swagger
 ```
-<img width="1567" height="950" alt="image" src="https://github.com/user-attachments/assets/c397f3c9-cc54-446c-8fbd-230b77fdccdc" />
+![Swagger UI](https://github.com/user-attachments/assets/c397f3c9-cc54-446c-8fbd-230b77fdccdc)
 
 <img width="1892" height="1024" alt="image" src="https://github.com/user-attachments/assets/cb5757b3-04f3-4281-8a3f-b817129a271a" />
 
@@ -204,7 +204,7 @@ dotnet run --project ConferenceRoomBooking.API
 On application startup:
 
 - Pending Entity Framework Core migrations are applied automatically
-- The database is created if it does not exist
+- The database schema is created or updated automatically
 - Initial halls and services are added to the database
 
 After the application starts, open Swagger UI to explore and test the API:
