@@ -267,14 +267,9 @@ For a production application, the following improvements could be considered:
 - Add pagination and filtering for large collections
 - Add caching for frequently requested data such as halls and services
 
-
-## Assumptions
-
-Some requirements in the task were not fully specified and required reasonable assumptions:
-
-- Bookings are restricted to the 06:00–23:00 window, based on the defined pricing tiers 
-  (morning/standard/peak/evening), even though this was not explicitly stated as a hard limit.
-- Domain entities were modeled as simple POCOs (anemic domain model), with business rules 
+**Business Rules**
+- Bookings are restricted to the 06:00–23:00 time range. This was treated as a reasonable business rule because the pricing system is also based on these time periods.
+- The initial seed data assigns specific services to specific halls as example data.
   centralized in the Application layer, for straightforward EF Core integration.
 - Report aggregation is performed at the repository level (translated into SQL via EF Core) 
   rather than in the Application layer, for query performance on larger datasets.
