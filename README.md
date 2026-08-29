@@ -180,11 +180,11 @@ cd ConferenceRoomBooking
 ConferenceRoomBooking.API/appsettings.json
 ```
 
-The default configuration uses SQL Server LocalDB:
+The default configuration uses SQL Server:
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=ConfBookDb;Trusted_Connection=True;TrustServerCertificate=True;"
+  "DefaultConnection": "Server=.\\SQLEXPRESS01;Database=ConfBookDb;Trusted_Connection=True;TrustServerCertificate=True;"
 }
 ```
 
