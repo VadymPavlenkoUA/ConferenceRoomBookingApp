@@ -49,3 +49,41 @@ The application uses Dependency Injection to provide dependencies between layers
 - **Swagger / OpenAPI** — used to document and test API endpoints
 - **Middleware** — used for centralized exception handling
 - **Rate Limiting** — limits the number of requests from a single client to protect the API from excessive load
+
+
+## Features
+
+### Conference Halls
+
+- Create, view, update, and delete conference halls
+- Configure hall capacity and hourly rental rate
+- Assign available services to each hall
+- Search for available halls by capacity and booking time
+
+### Additional Services
+
+- Create, view, update, and delete additional services
+- Set a price for each service
+- Prevent deletion of services that are used by halls or bookings
+
+### Bookings
+
+- Create, view, update, and delete bookings
+- Select a conference hall and additional services
+- Validate booking time intervals
+- Prevent overlapping bookings for the same hall
+- Verify that selected services are available for the selected hall
+- Automatically calculate hall rental, services, and total booking prices
+
+### Reports
+
+- Get overall booking statistics for a specified period
+- Calculate total revenue and average booking price
+- Get hall popularity statistics
+- Get service popularity statistics
+
+### API Protection and Error Handling
+
+- Centralized exception handling with consistent HTTP responses
+- Rate limiting of 100 requests per minute per client IP address
+- Input validation for booking, hall, service, and report requests
