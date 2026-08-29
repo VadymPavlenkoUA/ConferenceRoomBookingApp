@@ -77,8 +77,7 @@ The application uses Dependency Injection to provide dependencies between layers
 
 ### Reports
 
-- Get overall booking statistics for a specified period
-- Calculate total revenue and average booking price
+- Get overall booking statistics for a specified period (total bookings, total revenue, average booking price)
 - Get hall popularity statistics
 - Get service popularity statistics
 
@@ -162,7 +161,7 @@ The tests are implemented using **xUnit** and **Moq**.
 Make sure the following tools are installed:
 
 - **.NET 10 SDK**
-- **SQL Server** (or any database)
+- **SQL Server** (Express, LocalDB, or full instance)
 - **Git**
 
 ### Installation
@@ -251,3 +250,7 @@ ConferenceRoomBooking/
 ## Possible Improvements
 
 The current implementation focuses on the core requirements of the task. The following improvements could be considered for a production environment:
+
+- Add authentication and authorization with role-based access control
+- Add pagination and filtering for large collections
+- Improve concurrency handling for simultaneous booking requests
