@@ -139,8 +139,6 @@ https://localhost:<port>/swagger
 ```
 <img width="1567" height="950" alt="image" src="https://github.com/user-attachments/assets/c397f3c9-cc54-446c-8fbd-230b77fdccdc" />
 
-<img width="1891" height="948" alt="image" src="https://github.com/user-attachments/assets/c31df239-2d7a-4964-ada7-04cbd1355c4c" />
-
 <img width="1892" height="1024" alt="image" src="https://github.com/user-attachments/assets/cb5757b3-04f3-4281-8a3f-b817129a271a" />
 
 
