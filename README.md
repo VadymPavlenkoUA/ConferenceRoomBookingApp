@@ -262,6 +262,10 @@ For a production application, the following improvements could be considered:
 
 **Security**
 - Authentication and authorization were not implemented because they were outside the scope of the task.
+
+**Business Rules**
+- Bookings are restricted to the 06:00–23:00 time range. This was treated as a reasonable business rule because the pricing system is also based on these time periods.
+- The initial seed data assigns specific services to specific halls as example data.
   Role-based access control could be added in a production application.
 
 **Scalability**
