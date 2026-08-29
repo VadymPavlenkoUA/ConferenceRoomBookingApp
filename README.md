@@ -139,7 +139,7 @@ https://localhost:<port>/swagger
 ```
 ![Swagger UI](https://github.com/user-attachments/assets/c397f3c9-cc54-446c-8fbd-230b77fdccdc)
 
-<img width="1892" height="1024" alt="image" src="https://github.com/user-attachments/assets/cb5757b3-04f3-4281-8a3f-b817129a271a" />
+![Swagger Endpoint](https://github.com/user-attachments/assets/cb5757b3-04f3-4281-8a3f-b817129a271a)
 
 
 ## Testing
