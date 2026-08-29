@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConferenceRoomBooking.Services
+namespace ConferenceRoomBooking.Tests
 {
     public class PricingServiceTests
     {

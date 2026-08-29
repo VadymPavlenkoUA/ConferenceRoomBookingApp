@@ -127,6 +127,13 @@ namespace ConferenceRoomBooking.Application.Services
                 return false;
             }
 
+            var hasBookings = await _hallRepository.HasBookingsAsync(id, cancellationToken);
+
+            if (hasBookings)
+            {
+                throw new InvalidOperationException("Hall cannot be deleted because it has existing bookings.");
+            }
+
             await _hallRepository.DeleteAsync(hall);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);

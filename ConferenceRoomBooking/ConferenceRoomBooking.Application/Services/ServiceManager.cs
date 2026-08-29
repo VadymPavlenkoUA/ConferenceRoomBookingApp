@@ -83,6 +83,13 @@ namespace ConferenceRoomBooking.Application.Services
                 return false;
             }
 
+            var isUsed = await _serviceRepository.IsUsedAsync(id, cancellationToken);
+
+            if (isUsed)
+            {
+                throw new InvalidOperationException("Service cannot be deleted because it is used by a hall or booking.");
+            }
+
             await _serviceRepository.DeleteAsync(service);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);

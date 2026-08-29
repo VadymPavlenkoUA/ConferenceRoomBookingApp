@@ -15,5 +15,7 @@ namespace ConferenceRoomBooking.Application.Interfaces.Repositories
         Task UpdateAsync(Hall hall);
 
         Task DeleteAsync(Hall hall);
+
+        Task<bool> HasBookingsAsync(int hallId, CancellationToken cancellationToken = default);
     }
 }

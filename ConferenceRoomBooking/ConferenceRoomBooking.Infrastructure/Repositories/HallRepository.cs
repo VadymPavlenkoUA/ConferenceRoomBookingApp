@@ -54,5 +54,10 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
 
             return Task.CompletedTask;
         }
+
+        public async Task<bool> HasBookingsAsync(int hallId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Bookings.AnyAsync(b => b.HallId == hallId, cancellationToken);
+        }
     }
 }
