@@ -25,3 +25,28 @@ The main business requirements are:
 - Calculate the total booking cost, including the hall rental and selected services
 - Prevent deletion of halls and services that are currently used by existing bookings or hall configurations
 - Provide statistical reports on bookings, revenue, hall popularity, and service popularity
+
+
+## Architecture
+
+The project follows a layered architecture with separation of responsibilities:
+
+- **API** — HTTP controllers, middleware, Swagger configuration and application startup
+- **Application** — business logic, DTOs, service interfaces and repository interfaces
+- **Domain** — core business entities and relationships
+- **Infrastructure** — Entity Framework Core, database context, repository implementations and database seeding
+
+The application uses Dependency Injection to provide dependencies between layers.
+
+
+### Main Technical Decisions
+
+- **ASP.NET Core Web API** — used to build the REST API
+- **Entity Framework Core** — used for database access and ORM
+- **Microsoft SQL Server** — used as the relational database
+- **Repository Pattern** — separates data access logic from business logic
+- **Unit of Work** — provides a common way to persist changes through the shared `DbContext`
+- **Dependency Injection** — used to manage application dependencies
+- **Swagger / OpenAPI** — used to document and test API endpoints
+- **Middleware** — used for centralized exception handling
+- **Rate Limiting** — limits the number of requests from a single client to protect the API from excessive load
