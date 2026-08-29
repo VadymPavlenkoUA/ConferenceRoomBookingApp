@@ -137,6 +137,7 @@ When running the application in the Development environment, Swagger UI is avail
 ```text
 https://localhost:<port>/swagger 
 ```
+<img width="1567" height="950" alt="image" src="https://github.com/user-attachments/assets/c397f3c9-cc54-446c-8fbd-230b77fdccdc" />
 
 ## Testing
 
@@ -270,8 +271,3 @@ For a production application, the following improvements could be considered:
 **Business Rules**
 - Bookings are restricted to the 06:00–23:00 time range. This was treated as a reasonable business rule because the pricing system is also based on these time periods.
 - The initial seed data assigns specific services to specific halls as example data.
-  centralized in the Application layer, for straightforward EF Core integration.
-- Report aggregation is performed at the repository level (translated into SQL via EF Core) 
-  rather than in the Application layer, for query performance on larger datasets.
-- The seed data assigns a specific set of services to each hall as an illustrative example, 
-  since the task's initial data only defines a general list of available services.
