@@ -137,3 +137,117 @@ When running the application in the Development environment, Swagger UI is avail
 
 ```text
 https://localhost:<port>/swagger 
+```
+
+## Testing
+
+The project includes unit tests covering the main business logic of the application.
+
+The tests cover:
+
+- Booking creation and update validation
+- Prevention of overlapping bookings
+- Validation of hall and service availability
+- Hall and service validation
+- Rental price calculation for different time periods
+- Report period validation
+
+The tests are implemented using **xUnit** and **Moq**.
+
+
+## Getting Started
+
+### Prerequisites
+
+Make sure the following tools are installed:
+
+- **.NET 10 SDK**
+- **SQL Server LocalDB** (usually included with Visual Studio)
+- **Git**
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd ConferenceRoomBooking
+```
+
+2. Verify the database connection string in:
+
+```text
+ConferenceRoomBooking.API/appsettings.json
+```
+
+The default configuration uses SQL Server LocalDB:
+
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=ConfBookDb;Trusted_Connection=True;TrustServerCertificate=True;"
+}
+```
+
+If you use another SQL Server instance, update the `Server` value in the connection string accordingly.
+
+### Run the Application
+
+Start the application from the `ConferenceRoomBooking.API` project:
+
+```bash
+dotnet run --project ConferenceRoomBooking.API
+```
+
+On application startup:
+
+- Pending Entity Framework Core migrations are applied automatically
+- The database is created if it does not exist
+- Initial halls and services are added to the database
+
+After the application starts, open Swagger UI to explore and test the API:
+
+```text
+https://localhost:<port>/swagger
+```
+
+
+## Project Structure
+
+```text
+ConferenceRoomBooking/
+├── ConferenceRoomBooking.API/
+│   ├── Controllers/
+│   ├── Middleware/
+│   └── Program.cs
+│
+├── ConferenceRoomBooking.Application/
+│   ├── DTOs/
+│   ├── Interfaces/
+│   └── Services/
+│
+├── ConferenceRoomBooking.Domain/
+│   └── Entities/
+│
+├── ConferenceRoomBooking.Infrastructure/
+│   ├── Data/
+│   │   ├── Configurations/
+│   │   └── Seed/
+│   └── Repositories/
+│
+└── ConferenceRoomBooking.Tests/
+    ├── Services/
+    └── ...
+```
+
+### Layer Responsibilities
+
+- **API** — handles HTTP requests, controllers, middleware, Swagger and application configuration
+- **Application** — contains business logic, DTOs and abstractions for services and repositories
+- **Domain** — contains core business entities and their relationships
+- **Infrastructure** — implements data access, Entity Framework Core configuration, repositories and database seeding
+- **Tests** — contains automated tests for the application's business logic
+
+
+## Possible Improvements
+
+The current implementation focuses on the core requirements of the task. The following improvements could be considered for a production environment:
