@@ -25,6 +25,7 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
         public async Task<List<Booking>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.Bookings
+                .AsNoTracking()
                 .Include(b => b.Hall)
                 .Include(b => b.BookingServices).ThenInclude(bs => bs.Service)
                 .ToListAsync(cancellationToken);

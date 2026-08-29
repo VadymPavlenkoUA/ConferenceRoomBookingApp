@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ConferenceRoomBooking.Infrastructure.Data.Configurations
 {
-    public class BookingServiceConfiguration: IEntityTypeConfiguration<BookingServiceItem>
+    public class BookingServiceItemConfiguration : IEntityTypeConfiguration<BookingServiceItem>
     {
         public void Configure(EntityTypeBuilder<BookingServiceItem> builder)
         {

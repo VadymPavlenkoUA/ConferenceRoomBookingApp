@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConferenceRoomBooking.Infrastructure.Data.Configurations
 {
-    public class HallServiceConfiguration : IEntityTypeConfiguration<HallServiceItem>
+    public class HallServiceItemConfiguration : IEntityTypeConfiguration<HallServiceItem>
     {
         public void Configure(EntityTypeBuilder<HallServiceItem> builder)
         {

@@ -25,6 +25,7 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
         public async Task<List<Hall>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.Halls
+                .AsNoTracking()
                 .Include(h => h.HallServices)
                 .ThenInclude(hs => hs.Service)
                 .ToListAsync(cancellationToken);
@@ -33,7 +34,7 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
         public async Task<List<Hall>> GetAvailableAsync(int capacity, DateTime startTime, DateTime endTime, CancellationToken cancellationToken = default)
         {
             // Виключаємо зали, які вже мають бронювання з перетином заданого часового інтервалу
-            return await _context.Halls.Where(h => h.Capacity >= capacity && !h.Bookings.Any(b =>
+            return await _context.Halls.AsNoTracking().Where(h => h.Capacity >= capacity && !h.Bookings.Any(b =>
                         startTime < b.EndTime && endTime > b.StartTime)).ToListAsync(cancellationToken);
         }
 

@@ -14,7 +14,7 @@ namespace ConferenceRoomBooking.Application.DTOs.Halls
         [Range(1, int.MaxValue)]
         public int Capacity { get; set; }
 
-        [Range(0, double.MaxValue)]
+        [Range(0, 1_000_000)]
         public decimal HourlyRate { get; set; }
 
         public List<int> ServiceIds { get; set; } = [];

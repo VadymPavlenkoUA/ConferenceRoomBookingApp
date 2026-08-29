@@ -24,35 +24,44 @@ namespace ConferenceRoomBooking.API.Middleware
             }
             catch (Exception exception)
             {
-                _logger.LogError(exception, "An unhandled exception occurred.");
+                var statusCode = GetStatusCode(exception);
 
-                await HandleExceptionAsync(context, exception);
+                if (statusCode == (int)HttpStatusCode.InternalServerError)
+                {
+                    _logger.LogError(exception, "An unhandled exception occurred.");
+                }
+                else
+                {
+                    _logger.LogWarning("Request failed with status {StatusCode}: {Message}", statusCode, exception.Message);
+                }
+
+                await HandleExceptionAsync(context, exception, statusCode);
             }
         }
 
-        private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private static async Task HandleExceptionAsync(HttpContext context, Exception exception, int statusCode)
         {
-            var statusCode = exception switch
-            {
-                ArgumentException => (int)HttpStatusCode.BadRequest,
-
-                KeyNotFoundException => (int)HttpStatusCode.NotFound,
-
-                InvalidOperationException => (int)HttpStatusCode.Conflict,
-
-                _ => (int)HttpStatusCode.InternalServerError
-            };
-
             context.Response.StatusCode = statusCode;
             context.Response.ContentType = "application/json";
 
             var response = new
             {
                 statusCode,
-                message = statusCode == 500 ? "An unexpected error occurred." : exception.Message
+                message = statusCode == (int)HttpStatusCode.InternalServerError ? "An unexpected error occurred." : exception.Message
             };
 
             await context.Response.WriteAsync(JsonSerializer.Serialize(response));
+        }
+
+        private static int GetStatusCode(Exception exception)
+        {
+            return exception switch
+            {
+                ArgumentException => (int)HttpStatusCode.BadRequest,
+                KeyNotFoundException => (int)HttpStatusCode.NotFound,
+                InvalidOperationException => (int)HttpStatusCode.Conflict,
+                _ => (int)HttpStatusCode.InternalServerError
+            };
         }
     }
 }

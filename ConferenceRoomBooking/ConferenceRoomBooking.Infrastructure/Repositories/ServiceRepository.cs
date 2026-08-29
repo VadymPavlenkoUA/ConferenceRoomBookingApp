@@ -23,12 +23,12 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
         {
             var serviceIds = ids.Distinct().ToList();
 
-            return await _context.Services.Where(s => serviceIds.Contains(s.Id)).ToListAsync(cancellationToken);
+            return await _context.Services.AsNoTracking().Where(s => serviceIds.Contains(s.Id)).ToListAsync(cancellationToken);
         }
 
         public async Task<List<Service>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            return await _context.Services.ToListAsync(cancellationToken);
+            return await _context.Services.AsNoTracking().ToListAsync(cancellationToken);
         }
 
         public async Task AddAsync(Service service, CancellationToken cancellationToken = default)
