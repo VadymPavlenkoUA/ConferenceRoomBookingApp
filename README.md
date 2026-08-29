@@ -121,6 +121,24 @@ The database contains the following main entities:
 - A booking can include multiple services
 - A service can be included in multiple bookings
 
+
+### Initial Seed Data
+
+On first run, the database is seeded with the following initial data:
+
+| Hall   | Capacity | Hourly Rate |
+|--------|----------|-------------|
+| Hall A | 50       | 2000 UAH    |
+| Hall B | 100      | 3500 UAH    |
+| Hall C | 30       | 1500 UAH    |
+
+| Service   | Price   |
+|-----------|---------|
+| Projector | 500 UAH |
+| Wi-Fi     | 300 UAH |
+| Sound     | 700 UAH |
+
+
 Entity Framework Core migrations are used to create and update the database schema.
 
 The application automatically applies pending migrations and seeds initial data when started.
