@@ -38,7 +38,6 @@ The project follows a layered architecture with separation of responsibilities:
 
 The application uses Dependency Injection to provide dependencies between layers.
 
-
 ### Main Technical Decisions
 
 - **ASP.NET Core Web API** — used to build the REST API
