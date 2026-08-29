@@ -87,3 +87,53 @@ The application uses Dependency Injection to provide dependencies between layers
 - Centralized exception handling with consistent HTTP responses
 - Rate limiting of 100 requests per minute per client IP address
 - Input validation for booking, hall, service, and report requests
+
+
+## Technologies
+
+- **C#**
+- **.NET 10**
+- **ASP.NET Core Web API**
+- **Entity Framework Core 10**
+- **Microsoft SQL Server**
+- **Swagger / OpenAPI**
+- **xUnit**
+- **Moq**
+- **Git**
+
+
+## Database
+
+The application uses **Microsoft SQL Server** with **Entity Framework Core**.
+
+The database contains the following main entities:
+
+- **Hall** — conference hall with capacity and hourly rental rate
+- **Service** — additional service that can be provided in a hall
+- **Booking** — reservation of a conference hall for a specific time period
+- **HallServiceItem** — many-to-many relationship between halls and services
+- **BookingServiceItem** — services selected for a specific booking
+
+### Relationships
+
+- One hall can have many bookings
+- A hall can provide multiple services
+- A service can be available in multiple halls
+- A booking can include multiple services
+- A service can be included in multiple bookings
+
+Entity Framework Core migrations are used to create and update the database schema.
+
+The application automatically applies pending migrations and seeds initial data when started.
+
+
+## API Documentation
+
+The API is documented using **Swagger / OpenAPI**.
+
+Swagger UI provides an interactive interface for exploring and testing all available API endpoints, including request parameters, request bodies, response types, and HTTP status codes.
+
+When running the application in the Development environment, Swagger UI is available at:
+
+```text
+https://localhost:<port>/swagger 
