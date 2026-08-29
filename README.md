@@ -232,11 +232,11 @@ ConferenceRoomBooking/
 │   ├── Data/
 │   │   ├── Configurations/
 │   │   └── Seed/
+│   ├── Migrations/
 │   └── Repositories/
 │
 └── ConferenceRoomBooking.Tests/
-    ├── Services/
-    └── ...
+    └── Tests/
 ```
 
 ### Layer Responsibilities
