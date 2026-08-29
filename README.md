@@ -249,8 +249,21 @@ ConferenceRoomBooking/
 
 ## Possible Improvements
 
-The current implementation focuses on the core requirements of the task. The following improvements could be considered for a production environment:
+The current implementation covers the main requirements of the task.  
+For a production application, the following improvements could be considered:
 
-- Add authentication and authorization with role-based access control
+**Architecture**
+- `IUnitOfWork` provides a simple abstraction over `DbContext.SaveChangesAsync`. 
+  A separate implementation could be introduced if more complex transaction management is required.
+
+**Concurrency**
+- The current booking overlap check may have a race condition if multiple requests try to book the same hall at the same time.
+  A production application could use database transactions or other concurrency control mechanisms.
+
+**Security**
+- Authentication and authorization were not implemented because they were outside the scope of the task.
+  Role-based access control could be added in a production application.
+
+**Scalability**
 - Add pagination and filtering for large collections
-- Improve concurrency handling for simultaneous booking requests
+- Add caching for frequently requested data such as halls and services
