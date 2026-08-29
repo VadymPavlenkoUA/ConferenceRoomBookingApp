@@ -31,24 +31,24 @@ The main business requirements are:
 
 The project follows a layered architecture with separation of responsibilities:
 
-- **API** — HTTP controllers, middleware, Swagger configuration and application startup
-- **Application** — business logic, DTOs, service interfaces and repository interfaces
-- **Domain** — core business entities and relationships
-- **Infrastructure** — Entity Framework Core, database context, repository implementations and database seeding
+- **API** – HTTP controllers, middleware, Swagger configuration and application startup
+- **Application** – business logic, DTOs, service interfaces and repository interfaces
+- **Domain** – core business entities and relationships
+- **Infrastructure** – Entity Framework Core, database context, repository implementations and database seeding
 
 The application uses Dependency Injection to provide dependencies between layers.
 
 ### Main Technical Decisions
 
-- **ASP.NET Core Web API** — used to build the REST API
-- **Entity Framework Core** — used for database access and ORM
-- **Microsoft SQL Server** — used as the relational database
-- **Repository Pattern** — separates data access logic from business logic
-- **Unit of Work** — provides a common way to persist changes through the shared `DbContext`
-- **Dependency Injection** — used to manage application dependencies
-- **Swagger / OpenAPI** — used to document and test API endpoints
-- **Middleware** — used for centralized exception handling
-- **Rate Limiting** — limits the number of requests from a single client to protect the API from excessive load
+- **ASP.NET Core Web API** – used to build the REST API
+- **Entity Framework Core** – used for database access and ORM
+- **Microsoft SQL Server** – used as the relational database
+- **Repository Pattern** – separates data access logic from business logic
+- **Unit of Work** – provides a common way to persist changes through the shared `DbContext`
+- **Dependency Injection** – used to manage application dependencies
+- **Swagger / OpenAPI** – used to document and test API endpoints
+- **Middleware** – used for centralized exception handling
+- **Rate Limiting** – limits the number of requests from a single client to protect the API from excessive load
 
 
 ## Features
@@ -108,11 +108,11 @@ The application uses **Microsoft SQL Server** with **Entity Framework Core**.
 
 The database contains the following main entities:
 
-- **Hall** — conference hall with capacity and hourly rental rate
-- **Service** — additional service that can be provided in a hall
-- **Booking** — reservation of a conference hall for a specific time period
-- **HallServiceItem** — many-to-many relationship between halls and services
-- **BookingServiceItem** — services selected for a specific booking
+- **Hall** – conference hall with capacity and hourly rental rate
+- **Service** – additional service that can be provided in a hall
+- **Booking** – reservation of a conference hall for a specific time period
+- **HallServiceItem** – many-to-many relationship between halls and services
+- **BookingServiceItem** – services selected for a specific booking
 
 ### Relationships
 
@@ -162,7 +162,7 @@ The tests are implemented using **xUnit** and **Moq**.
 Make sure the following tools are installed:
 
 - **.NET 10 SDK**
-- **SQL Server LocalDB** (usually included with Visual Studio)
+- **SQL Server** (or any database)
 - **Git**
 
 ### Installation
@@ -241,11 +241,11 @@ ConferenceRoomBooking/
 
 ### Layer Responsibilities
 
-- **API** — handles HTTP requests, controllers, middleware, Swagger and application configuration
-- **Application** — contains business logic, DTOs and abstractions for services and repositories
-- **Domain** — contains core business entities and their relationships
-- **Infrastructure** — implements data access, Entity Framework Core configuration, repositories and database seeding
-- **Tests** — contains automated tests for the application's business logic
+- **API** – handles HTTP requests, controllers, middleware, Swagger and application configuration
+- **Application** – contains business logic, DTOs and abstractions for services and repositories
+- **Domain** – contains core business entities and their relationships
+- **Infrastructure** – implements data access, Entity Framework Core configuration, repositories and database seeding
+- **Tests** – contains automated tests for the application's business logic
 
 
 ## Possible Improvements
