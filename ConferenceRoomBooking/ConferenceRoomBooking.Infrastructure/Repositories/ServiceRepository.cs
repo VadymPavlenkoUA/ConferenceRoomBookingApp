@@ -50,6 +50,7 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
+        // Не дозволяємо видаляти послугу, якщо вона використовується залом або існуючим бронюванням, щоб не порушити цілісність пов'язаних даних
         public async Task<bool> IsUsedAsync(int serviceId, CancellationToken cancellationToken = default)
         {
             return await _context.HallServices.AnyAsync(hs => hs.ServiceId == serviceId, cancellationToken) || 

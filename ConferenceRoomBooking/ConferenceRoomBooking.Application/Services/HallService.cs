@@ -79,6 +79,7 @@ namespace ConferenceRoomBooking.Application.Services
                 throw new ArgumentException("Start time must be earlier than end time.");
             }
 
+            // Пошук виконується на рівні репозиторію, щоб одразу виключити з результату зали, зайняті у вказаний період
             var halls = await _hallRepository.GetAvailableAsync(request.Capacity, request.StartTime, request.EndTime, cancellationToken);
 
             return halls.Select(MapToResponse).ToList();
@@ -127,6 +128,7 @@ namespace ConferenceRoomBooking.Application.Services
                 return false;
             }
 
+            // Не дозволяємо видаляти зал, який використовується в існуючих бронюваннях, щоб не порушити цілісність даних
             var hasBookings = await _hallRepository.HasBookingsAsync(id, cancellationToken);
 
             if (hasBookings)

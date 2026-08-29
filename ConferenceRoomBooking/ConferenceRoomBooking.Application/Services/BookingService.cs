@@ -39,6 +39,7 @@ public class BookingService : IBookingService
             throw new KeyNotFoundException($"Hall with ID {request.HallId} was not found.");
         }
 
+        // Перевіряємо перетин із вже існуючими бронюваннями, щоб один зал не можна було забронювати на той самий час
         var hasOverlap = await _bookingRepository.HasOverlappingBookingAsync(
                 request.HallId,
                 request.StartTime,
@@ -51,6 +52,14 @@ public class BookingService : IBookingService
         }
 
         var services = await GetServicesAsync(request.ServiceIds, cancellationToken);
+
+        // Послугу можна додати до бронювання лише тоді, коли вона доступна для вибраного залу
+        var servicesAvailable = await _hallRepository.HasServicesAsync(request.HallId, request.ServiceIds, cancellationToken);
+
+        if (!servicesAvailable)
+        {
+            throw new InvalidOperationException("One or more selected services are not available for this hall.");
+        }
 
         var rentalPrice = _pricingService.CalculateRentalPrice(hall.HourlyRate, request.StartTime, request.EndTime);
 
@@ -124,6 +133,7 @@ public class BookingService : IBookingService
             throw new KeyNotFoundException($"Hall with ID {request.HallId} was not found.");
         }
 
+        // Виключаємо поточне бронювання з перевірки, щоб воно не вважалося конфліктом із самим собою під час оновлення
         var hasOverlap = await _bookingRepository.HasOverlappingBookingAsync(
                 request.HallId,
                 request.StartTime,
@@ -138,8 +148,16 @@ public class BookingService : IBookingService
 
         var services = await GetServicesAsync(request.ServiceIds, cancellationToken);
 
+        var servicesAvailable = await _hallRepository.HasServicesAsync(request.HallId, request.ServiceIds, cancellationToken);
+
+        if (!servicesAvailable)
+        {
+            throw new InvalidOperationException("One or more selected services are not available for this hall.");
+        }
+
         var rentalPrice = _pricingService.CalculateRentalPrice(hall.HourlyRate, request.StartTime, request.EndTime);
 
+        // Повторно перевіряємо доступність послуг, оскільки під час оновлення бронювання набір послуг може змінитися
         var servicesPrice = services.Sum(s => s.Price);
 
         var totalPrice = rentalPrice + servicesPrice;

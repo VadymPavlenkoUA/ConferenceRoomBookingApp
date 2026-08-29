@@ -33,6 +33,8 @@ namespace ConferenceRoomBooking.Services
                 _unitOfWorkMock.Object);
         }
 
+        // Успішне створення бронювання
+
         [Fact]
         public async Task CreateAsync_ValidRequest_CreatesBooking()
         {
@@ -119,6 +121,9 @@ namespace ConferenceRoomBooking.Services
                 Times.Once);
         }
 
+
+        // Зал не знайдено
+
         [Fact]
         public async Task CreateAsync_HallDoesNotExist_ThrowsKeyNotFoundException()
         {
@@ -141,6 +146,9 @@ namespace ConferenceRoomBooking.Services
             await Assert.ThrowsAsync<KeyNotFoundException>(() => _bookingService.CreateAsync(request));
         }
 
+
+        // Некоректний часовий діапазон
+
         [Fact]
         public async Task CreateAsync_InvalidTimeRange_ThrowsArgumentException()
         {
@@ -156,6 +164,9 @@ namespace ConferenceRoomBooking.Services
             // Act & Assert
             await Assert.ThrowsAsync<ArgumentException>(() => _bookingService.CreateAsync(request));
         }
+
+
+        // Зал уже заброньований у вибраний час
 
         [Fact]
         public async Task CreateAsync_HasOverlap_ThrowsInvalidOperationException()
@@ -195,6 +206,9 @@ namespace ConferenceRoomBooking.Services
             // Act & Assert
             await Assert.ThrowsAsync<InvalidOperationException>(() => _bookingService.CreateAsync(request));
         }
+
+
+        // Послуга не знайдена
 
         [Fact]
         public async Task CreateAsync_ServiceDoesNotExist_ThrowsKeyNotFoundException()
@@ -249,6 +263,9 @@ namespace ConferenceRoomBooking.Services
             await Assert.ThrowsAsync<KeyNotFoundException>(() => _bookingService.CreateAsync(request));
         }
 
+
+        // Бронювання для оновлення не знайдено
+
         [Fact]
         public async Task UpdateAsync_BookingDoesNotExist_ReturnsNull()
         {
@@ -273,6 +290,9 @@ namespace ConferenceRoomBooking.Services
             // Assert
             Assert.Null(result);
         }
+
+
+        // Оновлення бронювання конфліктує з іншим бронюванням
 
         [Fact]
         public async Task UpdateAsync_HasOverlap_ThrowsInvalidOperationException()
@@ -326,6 +346,9 @@ namespace ConferenceRoomBooking.Services
             // Act & Assert
             await Assert.ThrowsAsync<InvalidOperationException>(() => _bookingService.UpdateAsync(1, request));
         }
+
+
+        // Успішне оновлення бронювання
 
         [Fact]
         public async Task UpdateAsync_ValidRequest_UpdatesBooking()
@@ -401,6 +424,9 @@ namespace ConferenceRoomBooking.Services
             _unitOfWorkMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
 
+
+        // Успішне видалення бронювання
+
         [Fact]
         public async Task DeleteAsync_BookingExists_DeletesBooking()
         {
@@ -427,6 +453,9 @@ namespace ConferenceRoomBooking.Services
 
             _unitOfWorkMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
+
+
+        // Бронювання для видалення не знайдено
 
         [Fact]
         public async Task DeleteAsync_BookingDoesNotExist_ReturnsFalse()

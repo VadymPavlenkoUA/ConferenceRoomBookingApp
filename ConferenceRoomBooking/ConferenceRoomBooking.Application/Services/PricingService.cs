@@ -32,6 +32,7 @@ namespace ConferenceRoomBooking.Application.Services
 
                 var duration = nextBoundary - start;
 
+                // Розраховуємо вартість окремими часовими інтервалами, оскільки різні періоди дня мають різні тарифи
                 totalPrice += (decimal)duration.TotalHours * hourlyRate * multiplier;
 
                 start = nextBoundary;
@@ -55,6 +56,7 @@ namespace ConferenceRoomBooking.Application.Services
             var start = startTime.TimeOfDay;
             var end = endTime.TimeOfDay;
 
+            // Бронювання дозволені лише в межах робочого часу конференц-залу
             if (start < OpeningTime || end > ClosingTime)
             {
                 throw new ArgumentException("Booking time must be between 06:00 and 23:00.");
@@ -85,6 +87,7 @@ namespace ConferenceRoomBooking.Application.Services
 
         private static decimal GetPriceMultiplier(TimeSpan time)
         {
+            // Різні часові періоди використовують різні коефіцієнти вартості відповідно до тарифної політики
             if (time >= OpeningTime && time < new TimeSpan(9, 0, 0))
             {
                 return MorningMultiplier;

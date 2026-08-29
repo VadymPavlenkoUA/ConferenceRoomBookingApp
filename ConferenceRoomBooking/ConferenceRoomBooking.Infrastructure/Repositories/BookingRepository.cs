@@ -51,6 +51,7 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
 
         public async Task<bool> HasOverlappingBookingAsync(int hallId, DateTime startTime, DateTime endTime, int? excludedBookingId = null, CancellationToken cancellationToken = default)
         {
+            // Перевіряємо перетин часових інтервалів, щоб один зал не можна було забронювати одночасно кількома клієнтами
             return await _context.Bookings.AnyAsync(b => b.HallId == hallId && b.Id != excludedBookingId &&
                 startTime < b.EndTime && endTime > b.StartTime, cancellationToken);
         }

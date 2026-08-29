@@ -5,6 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConferenceRoomBooking.Infrastructure.Repositories
 {
+
+    // Агрегація звітів виконується на рівні БД, щоб не завантажувати всі записи в пам'ять
+    // та ефективно використовувати можливості SQL для групування й підрахунку даних
+
     public class ReportRepository : IReportRepository
     {
         private readonly AppDbContext _context;

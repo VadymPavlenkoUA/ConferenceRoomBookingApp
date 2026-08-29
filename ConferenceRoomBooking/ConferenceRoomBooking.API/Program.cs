@@ -12,11 +12,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+// IUnitOfWork забезпечує єдине збереження змін для операції, використовуючи той самий екземпляр AppDbContext
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<AppDbContext>());
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ConferenceRoomBooking.API.xml"));
+});
 
 builder.Services.AddScoped<IHallRepository, HallRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
@@ -31,6 +35,7 @@ builder.Services.AddScoped<IReportService, ReportService>();
 
 builder.Services.AddControllers();
 
+// Обмежуємо кількість запитів від одного клієнта, щоб захистити API від надмірного навантаження та простих DoS-атак
 builder.Services.AddRateLimiter(options =>
 {
     options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(

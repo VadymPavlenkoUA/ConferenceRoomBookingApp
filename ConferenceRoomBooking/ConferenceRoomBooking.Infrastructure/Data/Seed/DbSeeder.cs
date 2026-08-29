@@ -7,6 +7,7 @@ namespace ConferenceRoomBooking.Infrastructure.Data.Seed
     {
         public static async Task SeedAsync(AppDbContext context)
         {
+            // Заповнюємо початкові дані лише для порожньої БД, щоб не створювати дублікати при наступних запусках
             if (await context.Halls.AnyAsync() || await context.Services.AnyAsync())
             {
                 return;

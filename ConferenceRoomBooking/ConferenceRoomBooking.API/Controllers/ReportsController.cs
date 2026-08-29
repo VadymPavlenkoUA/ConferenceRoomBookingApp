@@ -15,7 +15,14 @@ namespace ConferenceRoomBooking.API.Controllers
             _reportService = reportService;
         }
 
+        /// <summary>
+        /// Returns booking statistics for the specified period
+        /// </summary>
+        /// <param name="request">The report period</param>
+        /// <returns>Booking statistics including total bookings, revenue and average booking price</returns>
         [HttpGet("bookings/statistics")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<BookingStatisticsResponse>> GetBookingStatistics([FromQuery] ReportPeriodRequest request, CancellationToken cancellationToken)
         {
             var result = await _reportService.GetBookingStatisticsAsync(request, cancellationToken);
@@ -23,7 +30,14 @@ namespace ConferenceRoomBooking.API.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Returns halls ranked by booking popularity for the specified period
+        /// </summary>
+        /// <param name="request">The report period</param>
+        /// <returns>A list of halls ordered by the number of bookings</returns>
         [HttpGet("halls/popularity")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<List<HallPopularityResponse>>> GetHallPopularity([FromQuery] ReportPeriodRequest request, CancellationToken cancellationToken)
         {
             var result = await _reportService.GetHallPopularityAsync(request, cancellationToken);
@@ -31,7 +45,14 @@ namespace ConferenceRoomBooking.API.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Returns services ranked by usage for the specified period
+        /// </summary>
+        /// <param name="request">The report period</param>
+        /// <returns>A list of services ordered by usage count</returns>
         [HttpGet("services/popularity")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<List<ServicePopularityResponse>>> GetServicePopularity([FromQuery] ReportPeriodRequest request, CancellationToken cancellationToken)
         {
             var result = await _reportService.GetServicePopularityAsync(request, cancellationToken);

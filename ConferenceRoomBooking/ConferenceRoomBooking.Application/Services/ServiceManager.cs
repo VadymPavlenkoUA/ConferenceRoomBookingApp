@@ -83,6 +83,7 @@ namespace ConferenceRoomBooking.Application.Services
                 return false;
             }
 
+            // Не дозволяємо видаляти послугу, яка використовується залом або існуючим бронюванням, щоб зберегти цілісність пов'язаних даних
             var isUsed = await _serviceRepository.IsUsedAsync(id, cancellationToken);
 
             if (isUsed)

@@ -3,6 +3,8 @@ using System.Text.Json;
 
 namespace ConferenceRoomBooking.API.Middleware
 {
+
+    // Централізовано обробляємо винятки, щоб API повертало узгоджені HTTP-коди та JSON-відповіді замість необроблених помилок
     public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
