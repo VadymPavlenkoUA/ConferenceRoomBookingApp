@@ -192,7 +192,7 @@ Make sure the following tools are installed:
 
 ```bash
 git clone <repository-url>
-cd ConferenceRoomBookingApp\ConferenceRoomBooking
+cd ConferenceRoomBookingApp\ConferenceRoomBooking\ConferenceRoomBooking.API
 ```
 
 2. Verify the database connection string in:
@@ -213,10 +213,17 @@ If you use another SQL Server instance, update the `Server` value in the connect
 
 ### Run the Application
 
+If this is the first time running a .NET application with HTTPS on this machine, 
+trust the local development certificate (one-time setup):
+
+​```bash
+dotnet dev-certs https --trust
+​```
+
 Start the application from the `ConferenceRoomBooking.API` project:
 
 ```bash
-dotnet run --project ConferenceRoomBooking.API
+dotnet run --launch-profile https
 ```
 
 On application startup:
