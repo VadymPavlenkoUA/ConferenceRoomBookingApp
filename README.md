@@ -218,7 +218,7 @@ trust the local development certificate (one-time setup):
 
 ​```bash
 dotnet dev-certs https --trust
-​```
+```
 
 Start the application from the `ConferenceRoomBooking.API` project:
 
