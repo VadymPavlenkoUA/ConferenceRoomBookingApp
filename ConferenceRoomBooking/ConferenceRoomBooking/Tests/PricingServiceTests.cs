@@ -151,5 +151,17 @@ namespace ConferenceRoomBooking.Tests.Tests
                 new DateTime(2026, 9, 1, 20, 0, 0),
                 new DateTime(2026, 9, 1, 23, 30, 0)));
         }
+
+        // В неробочий час в різні дні
+
+        [Fact]
+        public void CalculateRentalPrice_CrossesMidnight_ThrowsException()
+        {
+            var service = new PricingService();
+            Assert.Throws<ArgumentException>(() => service.CalculateRentalPrice(
+                2000,
+                new DateTime(2026, 9, 1, 22, 0, 0),
+                new DateTime(2026, 9, 2, 2, 0, 0)));
+        }
     }
 }

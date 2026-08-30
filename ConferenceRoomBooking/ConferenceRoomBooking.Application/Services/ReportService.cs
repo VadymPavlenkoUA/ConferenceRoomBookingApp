@@ -39,6 +39,11 @@ namespace ConferenceRoomBooking.Application.Services
 
         private static void ValidatePeriod(DateTime from, DateTime to)
         {
+            if (from == default || to == default)
+            {
+                throw new ArgumentException("Both 'from' and 'to' query parameters are required.");
+            }
+
             if (from >= to)
             {
                 throw new ArgumentException("The start of the period must be earlier than the end.");
