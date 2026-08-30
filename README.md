@@ -216,7 +216,7 @@ If you use another SQL Server instance, update the `Server` value in the connect
 If this is the first time running a .NET application with HTTPS on this machine, 
 trust the local development certificate (one-time setup):
 
-​```bash
+```bash
 dotnet dev-certs https --trust
 ```
 
