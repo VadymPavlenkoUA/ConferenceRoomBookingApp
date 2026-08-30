@@ -198,7 +198,7 @@ cd ConferenceRoomBookingApp\ConferenceRoomBooking\ConferenceRoomBooking.API
 2. Verify the database connection string in:
 
 ```text
-ConferenceRoomBooking.API/appsettings.json
+ConferenceRoomBooking.API\appsettings.json
 ```
 
 The default configuration uses SQL Server:
