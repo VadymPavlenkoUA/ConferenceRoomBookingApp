@@ -192,7 +192,7 @@ Make sure the following tools are installed:
 
 ```bash
 git clone <repository-url>
-cd ConferenceRoomBookingApp/ConferenceRoomBooking
+cd ConferenceRoomBookingApp\ConferenceRoomBooking
 ```
 
 2. Verify the database connection string in:
