@@ -53,6 +53,11 @@ namespace ConferenceRoomBooking.Application.Services
                 throw new ArgumentException("Start time must be earlier than end time.");
             }
 
+            if (startTime.Date != endTime.Date)
+            {
+                throw new ArgumentException("Booking must start and end on the same day.");
+            }
+
             var start = startTime.TimeOfDay;
             var end = endTime.TimeOfDay;
 
