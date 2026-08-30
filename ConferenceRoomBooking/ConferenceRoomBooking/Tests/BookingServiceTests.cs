@@ -5,7 +5,7 @@ using ConferenceRoomBooking.Application.Services;
 using ConferenceRoomBooking.Domain.Entities;
 using Moq;
 
-namespace ConferenceRoomBooking.Services
+namespace ConferenceRoomBooking.Tests.Tests
 {
     public class BookingServiceTests
     {
@@ -97,6 +97,13 @@ namespace ConferenceRoomBooking.Services
                         bookingService.Service = service;
                     }
                 });
+
+            _hallRepositoryMock
+                .Setup(x => x.HasServicesAsync(
+                    request.HallId,
+                    request.ServiceIds,
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true);
 
             // Act
             var result = await _bookingService.CreateAsync(request);
@@ -412,6 +419,13 @@ namespace ConferenceRoomBooking.Services
                     request.EndTime))
                 .Returns(4000);
 
+            _hallRepositoryMock
+                .Setup(x => x.HasServicesAsync(
+                    request.HallId,
+                    request.ServiceIds,
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true);
+
             // Act
             var result = await _bookingService.UpdateAsync(1, request);
 
@@ -474,6 +488,34 @@ namespace ConferenceRoomBooking.Services
             Assert.False(result);
 
             _bookingRepositoryMock.Verify(x => x.DeleteAsync(It.IsAny<Booking>()), Times.Never);
+        }
+
+        // Послуга не входить у перелік доступних для залу
+
+        [Fact]
+        public async Task CreateAsync_ServiceNotAvailableForHall_ThrowsInvalidOperationException()
+        {
+            var request = new CreateBookingRequest
+            {
+                HallId = 1,
+                StartTime = new DateTime(2026, 9, 1, 10, 0, 0),
+                EndTime = new DateTime(2026, 9, 1, 12, 0, 0),
+                ServiceIds = new List<int> { 1 }
+            };
+
+            var hall = new Hall { Id = 1, Name = "Conference Hall", Capacity = 20, HourlyRate = 2000 };
+            var service = new Service { Id = 1, Name = "Coffee", Price = 400 };
+
+            _hallRepositoryMock.Setup(x => x.GetByIdAsync(request.HallId, It.IsAny<CancellationToken>())).ReturnsAsync(hall);
+            _bookingRepositoryMock.Setup(x => x.HasOverlappingBookingAsync(
+                request.HallId, request.StartTime, request.EndTime, null, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(false);
+            _serviceRepositoryMock.Setup(x => x.GetByIdsAsync(It.IsAny<IEnumerable<int>>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new List<Service> { service });
+            _hallRepositoryMock.Setup(x => x.HasServicesAsync(request.HallId, request.ServiceIds, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(false);
+
+            await Assert.ThrowsAsync<InvalidOperationException>(() => _bookingService.CreateAsync(request));
         }
     }
 }
