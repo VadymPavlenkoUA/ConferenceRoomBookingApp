@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ConferenceRoomBooking.Application.DTOs.Reports
+﻿namespace ConferenceRoomBooking.Application.DTOs.Reports
 {
     public class BookingStatisticsResponse
     {

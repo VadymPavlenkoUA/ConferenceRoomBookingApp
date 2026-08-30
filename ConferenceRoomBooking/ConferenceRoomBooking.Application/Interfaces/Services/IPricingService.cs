@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ConferenceRoomBooking.Application.Interfaces.Services
+﻿namespace ConferenceRoomBooking.Application.Interfaces.Services
 {
     public interface IPricingService
     {

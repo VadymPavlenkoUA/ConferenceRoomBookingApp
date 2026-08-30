@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ConferenceRoomBooking.Domain.Entities
+﻿namespace ConferenceRoomBooking.Domain.Entities
 {
     public class BookingServiceItem
     {

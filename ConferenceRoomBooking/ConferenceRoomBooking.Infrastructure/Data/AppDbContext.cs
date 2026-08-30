@@ -1,15 +1,12 @@
 ﻿using ConferenceRoomBooking.Application.Interfaces.Services;
 using ConferenceRoomBooking.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConferenceRoomBooking.Infrastructure.Data
 {
-    public class AppDbContext: DbContext, IUnitOfWork
+    public class AppDbContext : DbContext, IUnitOfWork
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }

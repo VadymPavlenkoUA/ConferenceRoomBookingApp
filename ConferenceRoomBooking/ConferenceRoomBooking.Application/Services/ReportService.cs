@@ -1,9 +1,6 @@
 ﻿using ConferenceRoomBooking.Application.DTOs.Reports;
 using ConferenceRoomBooking.Application.Interfaces.Repositories;
 using ConferenceRoomBooking.Application.Interfaces.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConferenceRoomBooking.Application.Services
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ConferenceRoomBooking.Application.DTOs.Halls
+﻿namespace ConferenceRoomBooking.Application.DTOs.Halls
 {
     public class AvailableHallsRequest
     {

@@ -72,7 +72,7 @@ namespace ConferenceRoomBooking.Infrastructure.Repositories
             }
 
             // Перевіряємо, що всі вибрані послуги дійсно доступні для конкретного залу перед створенням або оновленням бронювання
-            var availableCount = await _context.HallServices.CountAsync(hs => hs.HallId == hallId && 
+            var availableCount = await _context.HallServices.CountAsync(hs => hs.HallId == hallId &&
             requestedIds.Contains(hs.ServiceId), cancellationToken);
 
             return availableCount == requestedIds.Count;
